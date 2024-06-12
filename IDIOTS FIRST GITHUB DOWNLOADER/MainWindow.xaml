@@ -1,0 +1,25 @@
+﻿<Window x:Class="IDIOTS_FIRST_GITHUB_DOWNLOADER.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:fa="http://schemas.fontawesome.io/icons/"
+        xmlns:local="clr-namespace:IDIOTS_FIRST_GITHUB_DOWNLOADER"
+        mc:Ignorable="d"
+        Title="GITHUB DOWNLOADER FOR IDIOTS" Height="450" Width="319" Background="#FF252424" Foreground="White">
+    <Grid>
+
+        <StackPanel x:Name="resultsPanel">
+            <Grid Height="59">
+                <Label Content="ARE YOU TOO STUPID TO GO TO THE &#xD;&#xA;RELEASES PAGE? THIS DOOHICKEY WILL DO IT&#xD;&#xA;FOR YOU, YOU DUMB FUCK." Foreground="White" HorizontalAlignment="Left" Width="310" FontWeight="Bold" FontStyle="Italic"/>
+            </Grid>
+            <Grid Height="41">
+                <Button x:Name="searchbtn" Content="Search" HorizontalAlignment="Left" Margin="235,10,0,0" VerticalAlignment="Top" Click="Button_Click" Width="63" Foreground="Black"/>
+                <TextBox x:Name="repoTxt" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Repository Name..." VerticalAlignment="Top" Width="225" Height="20" KeyDown="repoTxt_KeyDown"/>
+            </Grid>
+            <fa:ImageAwesome x:Name="spinner" Icon="Refresh" Spin="True" Height="48" Width="48" Visibility="Collapsed"/>
+
+        </StackPanel>
+
+    </Grid>
+</Window>
