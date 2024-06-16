@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using GithubDl.GithubSearch;
+using GithubDL;
 
 namespace IDIOTS_FIRST_GITHUB_DOWNLOADER
 {
@@ -20,7 +20,7 @@ namespace IDIOTS_FIRST_GITHUB_DOWNLOADER
     /// </summary>
     public partial class MainWindow : Window
     {
-        private GithubSearch githubSearch;
+        private GithubSearch githubSearch = new GithubSearch();
         public MainWindow()
         {
             InitializeComponent();
@@ -61,7 +61,7 @@ namespace IDIOTS_FIRST_GITHUB_DOWNLOADER
             spinner.Visibility = Visibility.Visible;
             try
             {
-                var result = await githubSearch.Search(repoTxt.Text);
+                var result = await githubSearch.RunSearch(repoTxt.Text);
                 int end = result.TotalCount > 10 ? 10 : result.TotalCount;
                 for (int i = 0; i < end; i++)
                 {

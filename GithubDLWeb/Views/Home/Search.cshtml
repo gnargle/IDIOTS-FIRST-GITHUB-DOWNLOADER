@@ -1,0 +1,25 @@
+﻿@model GithubDLWeb.Models.SearchResult
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<div class="text-center">
+    <input type="text" id="searchString" name="searchString" onchange="search()" />
+    <button onclick="search()">Search</button>
+</div>
+
+<table class="table">
+    <tbody>
+@foreach (var item in Model.Results) {
+        <tr>                
+            <td class="ghDownload" >
+                <a href="@item.DownloadURL">
+                    <i class="fa-solid fa-download"></i>
+                    @Html.DisplayFor(i => item.RepoName)
+                </a>
+            </td>            
+        </tr>
+}
+    </tbody>
+</table>
