@@ -23,8 +23,16 @@ public class GithubSearch
             return await _client.Search.SearchRepo(request);
     }
 
-    public async Task<Release> GetLatestRelease(long repoId)
+    public async Task<Release?> GetLatestRelease(long repoId)
     {
+        try
+        {
             return await _client.Repository.Release.GetLatest(repoId);
+        }
+        catch (NotFoundException)
+        {
+            //no release, ignore.
+            return null;
+        }
     }
 }

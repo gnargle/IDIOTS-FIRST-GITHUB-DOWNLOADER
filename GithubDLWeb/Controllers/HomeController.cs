@@ -34,31 +34,40 @@ namespace GithubDLWeb.Controllers
                 searchString = uri.PathAndQuery;
             }
 
-            var model = new SearchResult();
-            var result = await _search.RunSearch(searchString);
-            int end = result.TotalCount > 10 ? 10 : result.TotalCount;
-            for (int i = 0; i < end; i++)
+            try
             {
-                var repo = result.Items[i];
-                try
+                var model = new SearchResult();
+                var result = await _search.RunSearch(searchString);
+                int end = result.TotalCount > 10 ? 10 : result.TotalCount;
+                for (int i = 0; i < end; i++)
                 {
+                    var repo = result.Items[i];                    
                     var rel = await _search.GetLatestRelease(repo.Id);
-                    foreach (var asset in rel.Assets)
+                    if (rel != null)
                     {
-                        model.Results.Add(new ResultEntry()
+                        foreach (var asset in rel.Assets)
                         {
-                            RepoName = $"({repo.FullName}) {asset.Name}",
-                            DownloadURL = asset.BrowserDownloadUrl
-                        });
+                            model.Results.Add(new ResultEntry()
+                            {
+                                RepoName = $"({repo.FullName}) {asset.Name}",
+                                DownloadURL = asset.BrowserDownloadUrl
+                            });
+                        }
                     }
                 }
-                catch (NotFoundException)
-                {
-                    //no release, ignore.
-                }
+                return View(model);
             }
-
-            return View(model);
+            catch (RateLimitExceededException)
+            {
+                return View("Error", new ErrorViewModel()
+                {
+                    ErrorMessage = "Oops, we hit rate limit - try again later."
+                });                
+            }
+            catch (Exception ex)
+            {
+                return RedirectToAction("Error");                
+            }            
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
