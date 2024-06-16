@@ -26,7 +26,14 @@ namespace GithubDLWeb.Controllers
         {
             if (String.IsNullOrWhiteSpace(searchString))
                 return RedirectToAction("Index");
-            
+            if (searchString.Contains("http"))
+            {
+                //user has pasted url, parse that shit
+                //sample: https://github.com/gnargle/IDIOTS-FIRST-GITHUB-DOWNLOADER
+                var uri = new Uri(searchString);
+                searchString = uri.PathAndQuery;
+            }
+
             var model = new SearchResult();
             var result = await _search.RunSearch(searchString);
             int end = result.TotalCount > 10 ? 10 : result.TotalCount;
