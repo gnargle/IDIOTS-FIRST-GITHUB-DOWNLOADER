@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using GithubDL;
 
 namespace IDIOTS_FIRST_GITHUB_DOWNLOADER
 {
@@ -19,7 +20,7 @@ namespace IDIOTS_FIRST_GITHUB_DOWNLOADER
     /// </summary>
     public partial class MainWindow : Window
     {
-        private GitHubClient client = new GitHubClient(new ProductHeaderValue("IdiotsFirstGithubDownloader"));
+        private GithubSearch githubSearch = new GithubSearch();
         public MainWindow()
         {
             InitializeComponent();
@@ -60,15 +61,14 @@ namespace IDIOTS_FIRST_GITHUB_DOWNLOADER
             spinner.Visibility = Visibility.Visible;
             try
             {
-                var request = new SearchRepositoriesRequest(repoTxt.Text);
-                var result = await client.Search.SearchRepo(request);
+                var result = await githubSearch.RunSearch(repoTxt.Text);
                 int end = result.TotalCount > 10 ? 10 : result.TotalCount;
                 for (int i = 0; i < end; i++)
                 {
                     var repo = result.Items[i];
                     try
                     {
-                        var rel = await client.Repository.Release.GetLatest(repo.Id);
+                        var rel = await githubSearch.GetLatestRelease(repo.Id);
                         foreach (var asset in rel.Assets)
                         {
                             var link = new Button();
@@ -91,7 +91,8 @@ namespace IDIOTS_FIRST_GITHUB_DOWNLOADER
                         //no release, ignore.
                     }
                 }
-            } finally { spinner.Visibility = Visibility.Collapsed;}
+            }
+            finally { spinner.Visibility = Visibility.Collapsed; }
         }
 
         private async void Button_Click(object sender, RoutedEventArgs e)
