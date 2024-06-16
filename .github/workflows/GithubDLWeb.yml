@@ -2,7 +2,7 @@ name: Build and deploy .NET Core application to Web App GithubDLWeb
 on:
   push:
     branches:
-    - web
+    - main
 env:
   AZURE_WEBAPP_NAME: GithubDLWeb
   AZURE_WEBAPP_PACKAGE_PATH: GithubDLWeb\published
