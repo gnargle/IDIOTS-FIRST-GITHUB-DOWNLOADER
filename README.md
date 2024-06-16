@@ -4,4 +4,4 @@ FINE. THEN TYPE THE NAME OF THE PROJECT INTO THIS TOOL AND IT WILL GET THE DOWNL
 HERE'S YOUR BIG DOWNLOAD LINK.
 # [DOWNLOAD HERE](https://github.com/gnargle/IDIOTS-FIRST-GITHUB-DOWNLOADER/releases/download/release/IDIOTSFIRSTGITHUBDOWNLOADER.zip)
 
-THERE IS ALSO A WEB VERSION. [![GithubDLWeb](https://github.com/gnargle/IDIOTS-FIRST-GITHUB-DOWNLOADER/actions/workflows/GithubDLWeb.yml/badge.svg)](https://github.com/gnargle/IDIOTS-FIRST-GITHUB-DOWNLOADER/actions/workflows/GithubDLWeb.yml)
+THERE IS ALSO A [WEB VERSION.](http://githubdl.top) [![GithubDLWeb](https://github.com/gnargle/IDIOTS-FIRST-GITHUB-DOWNLOADER/actions/workflows/GithubDLWeb.yml/badge.svg)](https://github.com/gnargle/IDIOTS-FIRST-GITHUB-DOWNLOADER/actions/workflows/GithubDLWeb.yml)
